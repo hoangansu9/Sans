@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import './style.scss';
-import Pipe from '../Pipe';
-import Bird from '../Bird';
-import Foreground from '../Foreground';
+import Bird from './Bird/index';
 import { connect } from 'react-redux';
-
+import Pipe from './Pipe/index';
+import Foreground from './Foreground/index';
 let gameLoop;
 let pipeGenerator;
 const Game = ({ status, start, fly }) => {

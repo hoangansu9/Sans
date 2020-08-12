@@ -1,0 +1,29 @@
+.sans-comp-Home {
+  .paralax-section {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Popins', sans-serif;
+    background: #111;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h2.layer {
+      position: relative;
+      color: #fff;
+      font-size: 12em;
+    }
+    img.layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
