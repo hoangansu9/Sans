@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import './style.scss';
-import Bird from './Bird/index';
-import { connect } from 'react-redux';
-import Pipe from './Pipe/index';
-import Foreground from './Foreground/index';
+import React, { useEffect } from "react";
+import "./style.scss";
+import Bird from "./Bird/index";
+import { connect } from "react-redux";
+import Pipe from "./Pipe/index";
+import Foreground from "./Foreground/index";
 let gameLoop;
 let pipeGenerator;
 const Game = ({ status, start, fly }) => {
-  if (status === 'game_over') {
+  if (status === "game_over") {
     clearInterval(gameLoop);
     clearInterval(pipeGenerator);
   }
@@ -16,16 +16,16 @@ const Game = ({ status, start, fly }) => {
       if (e.keyCode === 32) {
         fly();
       }
-      if (status !== 'playing') {
+      if (status !== "playing") {
         start();
       }
     };
-    document.addEventListener('keypress', handleKeyPress);
+    document.addEventListener("keypress", handleKeyPress);
   }, []);
 
   return (
     <div className="game-wrapper">
-      <Bird />
+      <Bird className="bird" />
       <Pipe />
       <Foreground />
     </div>
@@ -33,23 +33,23 @@ const Game = ({ status, start, fly }) => {
 };
 const fly = () => {
   return (dispatch) => {
-    dispatch({ type: 'FLY' });
+    dispatch({ type: "FLY" });
   };
 };
 const start = () => {
   return (dispatch, getState) => {
     const { status } = getState().game;
 
-    if (status !== 'playing') {
+    if (status !== "playing") {
       gameLoop = setInterval(() => {
-        dispatch({ type: 'FALL' });
-        dispatch({ type: 'RUNNING' });
+        dispatch({ type: "FALL" });
+        dispatch({ type: "RUNNING" });
         check(dispatch, getState);
       }, 300);
       pipeGenerator = setInterval(() => {
-        dispatch({ type: 'GENETARE' });
+        dispatch({ type: "GENETARE" });
       }, 200);
-      dispatch({ type: 'START' });
+      dispatch({ type: "START" });
     }
   };
 };
@@ -58,6 +58,9 @@ const check = (dispatch, getState) => {
   const birdY = state.bird.y;
   const pipes = state.pipe.pipes;
   const x = state.pipe.x;
+
+  const rect = state.bird.getBoundingClientRect();
+  console.log(rect.top, rect.right, rect.bottom, rect.left);
 
   const challenge = pipes
     .map(({ topHeight }, i) => {
@@ -75,7 +78,7 @@ const check = (dispatch, getState) => {
     });
 
   if (birdY > 512 - 108) {
-    dispatch({ type: 'GAMEOVER' });
+    dispatch({ type: "GAMEOVER" });
   }
 
   if (challenge.length) {
@@ -85,7 +88,7 @@ const check = (dispatch, getState) => {
       (x1 < 120 && 120 < x1 + 52 && birdY < y1) ||
       (x2 < 120 && 120 < x2 + 52 && birdY > y2)
     ) {
-      dispatch({ type: 'GAMEOVER' });
+      dispatch({ type: "GAMEOVER" });
     }
   }
 };
