@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Provider } from 'react-redux';
 import Game from './component/Game';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
@@ -16,7 +15,6 @@ const App = ({ store }) => {
             <Link to="/game">Game</Link>
           </li>
         </ul>
-
         <hr />
         <div className="main-route-place">
           <Route exact path="/" component={Home} />

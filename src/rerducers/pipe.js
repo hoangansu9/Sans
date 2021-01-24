@@ -9,7 +9,7 @@ export default (state = initialState, { type } = {}) => {
       if (!state.pipes.length) {
         return state;
       }
-      return { ...state, x: state.x - 10 };
+      return { ...state, x: state.x - 5 };
     case 'GENETARE':
       const topHeight = Math.round(Math.random() * 200);
       return { ...state, pipes: [...state.pipes, { topHeight }] };
